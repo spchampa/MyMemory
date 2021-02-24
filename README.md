@@ -1,4 +1,4 @@
 # MyMemory
 
-A memory game writen in Kotlin and Android SDK
+A memory game written in Kotlin and Android SDK.
 Using Firebase, Firestore and deployed on the Google Play store.
