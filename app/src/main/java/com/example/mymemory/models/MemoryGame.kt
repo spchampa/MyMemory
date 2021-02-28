@@ -5,7 +5,9 @@ import com.example.mymemory.utils.DEFAULT_ICONS
 class MemoryGame(private val boardSize: BoardSize) {
 
     val cards: List<MemoryCard>
-    val numPairsFound = 0
+    var numPairsFound = 0
+
+    private var indexOfSingleSelectedCard: Int? = null
 
     init {
         val chosenImages: List<Int> = DEFAULT_ICONS.shuffled().take(boardSize.getNumPairs())
@@ -13,8 +15,47 @@ class MemoryGame(private val boardSize: BoardSize) {
         cards = randomizedImages.map { MemoryCard(it) }
     }
 
-    fun flipCard(position: Int) {
+    fun flipCard(position: Int): Boolean {
         val card = cards[position]
+
+        // check the flipped cards logic. three cases:
+        // 0 cards previously flipped over => restore cards + flip over the selected card
+        // 1 cards previously flipped over => flip selected card and check if images match
+        // 2 cards previously flipped over => restore cards and flip over selected cards
+
+        var foundMatch = false
+
+        if (indexOfSingleSelectedCard == null) {
+            // 0 or 2 cards previously flipped over
+            restoreCards()
+            indexOfSingleSelectedCard = position
+        } else {
+            foundMatch = checkForMatch(indexOfSingleSelectedCard!!, position)
+            indexOfSingleSelectedCard = null
+        }
+
         card.isFaceUp = !card.isFaceUp
+
+        return foundMatch
+    }
+
+    private fun checkForMatch(position1: Int, position2: Int): Boolean {
+        if (cards[position1].identifier != cards[position2].identifier) {
+            // not a match
+            return false
+        }
+        // or if the user has found a pair
+        cards[position1].isMatched = true
+        cards[position2].isMatched = true
+        numPairsFound++
+        return true
+    }
+
+    private fun restoreCards() {
+        for (card in cards) {
+            if (!card.isMatched) {
+                card.isFaceUp = false
+            }
+        }
     }
 }
