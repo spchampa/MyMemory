@@ -1,1 +1,5 @@
 /build
+
+# Google Services (e.g. APIs or Firebase)
+# Note: I will need to re-get this file from firebase if I try to clone the github repo.
+google-services.json
