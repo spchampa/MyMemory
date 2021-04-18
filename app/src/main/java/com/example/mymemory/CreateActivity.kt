@@ -1,6 +1,7 @@
 package com.example.mymemory
 
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
@@ -95,14 +96,36 @@ class CreateActivity : AppCompatActivity() {
     }
 
     private fun saveDataToFirebase() {
-        val customGameName = etGameName.text.toString()
         Log.i(TAG, "saveDataToFirebase")
+        btnSave.isEnabled = false
+        val customGameName = etGameName.text.toString()
+
+        // check that we are not over writing someone else's data
+        db.collection("games").document(customGameName).get().addOnSuccessListener { document ->
+            if (document != null && document.data != null) {
+                AlertDialog.Builder(this)
+                    .setTitle("Name Taken")
+                    .setMessage("A game already exists with the name '$customGameName'. Please choose another.")
+                    .setPositiveButton("OK", null)
+                    .show()
+                btnSave.isEnabled = true
+            } else {
+                handleImageUploading(customGameName)
+            }
+        }.addOnFailureListener { exception ->
+            Log.e(TAG, "Encountered error while saving memory game", exception)
+            Toast.makeText(this, "Encountered error while saving memory game", Toast.LENGTH_SHORT).show()
+            btnSave.isEnabled = true
+        }
+    }
+
+    private fun handleImageUploading(gameName: String) {
         var didEncounterError = false
         val uploadedImageUrls = mutableListOf<String>()
 
         for ((index, photoUri) in chosenImageUris.withIndex()) {
             val imageByteArray = getImageByteArray(photoUri)
-            val filePath = "images/$customGameName/${System.currentTimeMillis()}-${index}.jpg"
+            val filePath = "images/$gameName/${System.currentTimeMillis()}-${index}.jpg"
             val photoReference = storage.reference.child(filePath)
             photoReference.putBytes(imageByteArray)
                 .continueWithTask { photoUploadTask ->
@@ -124,7 +147,7 @@ class CreateActivity : AppCompatActivity() {
                     Log.i(TAG, "Finished uploading $photoUri, num uploaded ${uploadedImageUrls.size}")
 
                     if (uploadedImageUrls.size == chosenImageUris.size) {
-                        handleAllImagesUploaded(customGameName, uploadedImageUrls)
+                        handleAllImagesUploaded(gameName, uploadedImageUrls)
                     }
                 }
         }
@@ -132,6 +155,24 @@ class CreateActivity : AppCompatActivity() {
 
     private fun handleAllImagesUploaded(gameName: String, imageUrls: MutableList<String>) {
         // TODO: upload this info to firestore
+        db.collection("games").document(gameName)
+            .set(mapOf("images" to imageUrls))
+            .addOnCompleteListener { gameCreationTask ->
+                if (!gameCreationTask.isSuccessful) {
+                    Log.e(TAG, "Exception with game creation", gameCreationTask.exception)
+                    Toast.makeText(this, "Failed game creation", Toast.LENGTH_SHORT).show()
+                    return@addOnCompleteListener
+                }
+                Log.i(TAG, "Successfully created game $gameName")
+                AlertDialog.Builder(this)
+                    .setTitle("Upload complete! Lets play your game '$gameName'")
+                    .setPositiveButton("OK") { _, _ ->
+                        val resultData = Intent()
+                        resultData.putExtra(EXTRA_GAME_NAME, gameName)
+                        setResult(Activity.RESULT_OK, resultData)
+                        finish()
+                    }.show()
+            }
 
     }
 
