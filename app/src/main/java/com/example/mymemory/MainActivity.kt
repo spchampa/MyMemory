@@ -164,8 +164,9 @@ class MainActivity : AppCompatActivity() {
                 Picasso.get().load(imageUrl).fetch()
             }
             Snackbar.make(clRoot, "You are now playing '$customGameName'!", Snackbar.LENGTH_LONG).show()
-            setupBoard()
             gameName = customGameName
+            setupBoard()
+
         }.addOnFailureListener { exception ->
             Log.e(TAG, "Exception when retrieving game", exception)
         }
