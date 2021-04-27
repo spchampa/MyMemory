@@ -1,6 +1,6 @@
-package com.example.mymemory.utils
+package com.sizzle.mymemory.utils
 
-import com.example.mymemory.R
+import com.sizzle.mymemory.R
 
 const val EXTRA_BOARD_SIZE = "EXTRA_BOARD_SIZE"
 const val EXTRA_GAME_NAME = "EXTRA_GAME_NAME"

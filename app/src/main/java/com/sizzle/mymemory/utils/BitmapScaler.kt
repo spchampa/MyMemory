@@ -1,4 +1,4 @@
-package com.example.mymemory.utils
+package com.sizzle.mymemory.utils
 
 import android.graphics.Bitmap
 

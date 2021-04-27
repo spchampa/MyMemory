@@ -1,4 +1,4 @@
-package com.example.mymemory
+package com.sizzle.mymemory
 
 import org.junit.Test
 

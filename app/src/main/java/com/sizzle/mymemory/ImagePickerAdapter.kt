@@ -1,4 +1,4 @@
-package com.example.mymemory
+package com.sizzle.mymemory
 
 import android.content.Context
 import android.net.Uri
@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.mymemory.models.BoardSize
+import com.sizzle.mymemory.models.BoardSize
 import kotlin.math.min
 
 class ImagePickerAdapter(

@@ -1,6 +1,6 @@
-package com.example.mymemory.models
+package com.sizzle.mymemory.models
 
-import com.example.mymemory.utils.DEFAULT_ICONS
+import com.sizzle.mymemory.utils.DEFAULT_ICONS
 
 class MemoryGame(
     private val boardSize: BoardSize,

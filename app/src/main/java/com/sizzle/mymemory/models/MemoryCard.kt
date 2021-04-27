@@ -1,4 +1,4 @@
-package com.example.mymemory.models
+package com.sizzle.mymemory.models
 
 data class MemoryCard(
     val identifier: Int,

@@ -1,4 +1,4 @@
-package com.example.mymemory
+package com.sizzle.mymemory
 
 import android.animation.ArgbEvaluator
 import android.app.Activity
@@ -20,11 +20,11 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.mymemory.models.BoardSize
-import com.example.mymemory.models.MemoryGame
-import com.example.mymemory.models.UserImageList
-import com.example.mymemory.utils.EXTRA_BOARD_SIZE
-import com.example.mymemory.utils.EXTRA_GAME_NAME
+import com.sizzle.mymemory.models.BoardSize
+import com.sizzle.mymemory.models.MemoryGame
+import com.sizzle.mymemory.models.UserImageList
+import com.sizzle.mymemory.utils.EXTRA_BOARD_SIZE
+import com.sizzle.mymemory.utils.EXTRA_GAME_NAME
 import com.github.jinatonic.confetti.CommonConfetti
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.firestore.ktx.firestore

@@ -1,4 +1,4 @@
-package com.example.mymemory.models
+package com.sizzle.mymemory.models
 
 import com.google.firebase.firestore.PropertyName
 

@@ -1,4 +1,4 @@
-package com.example.mymemory.models
+package com.sizzle.mymemory.models
 
 enum class BoardSize(val numCards: Int) {
     EASY(8),

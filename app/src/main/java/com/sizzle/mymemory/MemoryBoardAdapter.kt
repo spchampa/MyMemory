@@ -1,4 +1,4 @@
-package com.example.mymemory
+package com.sizzle.mymemory
 
 import android.content.Context
 import android.util.Log
@@ -10,8 +10,8 @@ import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.example.mymemory.models.BoardSize
-import com.example.mymemory.models.MemoryCard
+import com.sizzle.mymemory.models.BoardSize
+import com.sizzle.mymemory.models.MemoryCard
 import com.squareup.picasso.Picasso
 import kotlin.math.min
 

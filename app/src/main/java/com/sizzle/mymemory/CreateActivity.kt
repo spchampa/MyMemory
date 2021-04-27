@@ -1,4 +1,4 @@
-package com.example.mymemory
+package com.sizzle.mymemory
 
 import android.app.Activity
 import android.app.AlertDialog
@@ -23,8 +23,8 @@ import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.mymemory.models.BoardSize
-import com.example.mymemory.utils.*
+import com.sizzle.mymemory.models.BoardSize
+import com.sizzle.mymemory.utils.*
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage

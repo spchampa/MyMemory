@@ -1,4 +1,4 @@
-package com.example.mymemory.utils
+package com.sizzle.mymemory.utils
 
 import android.app.Activity
 import android.content.Context
